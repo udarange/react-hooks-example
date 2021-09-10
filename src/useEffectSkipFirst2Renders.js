@@ -6,7 +6,7 @@ const useEffectSkipFirst2Renders = (callback, dependencies) => {
   useEffect(() => {
     console.log("------triggered-----");
     if (initialRenderDone.current < 2) {
-      initialRenderDone.current++
+      initialRenderDone.current++;
     } else {
       callback();
     }

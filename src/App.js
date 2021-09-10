@@ -64,7 +64,7 @@ function App() {
       return 1;
     }
     return n * factorial(n - 1);
-  }
+  };
   const memoizedValue = useMemo(() => factorial(count), [count, factorial]);
 
   // -------------------7. useCallback-------------------
