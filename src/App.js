@@ -8,7 +8,7 @@ import React, {
   useState,
 } from "react";
 import InnerComponent from "./InnerComponent";
-import useEffectSkipFirstRender from "./useEffectSkipFirstRender";
+import useEffectSkipFirst2Renders from "./useEffectSkipFirst2Renders";
 
 // -------------------3. useContext------------------- <- share data without passing props
 const user = {
@@ -28,8 +28,8 @@ function App() {
     console.log(count);
   }, [count]);
 
-  useEffectSkipFirstRender(() => {
-    console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+  useEffectSkipFirst2Renders(() => {
+    console.log("----this is my third time------");
   }, [count]);
 
   // -------------------4. useRef------------------- <- will not re-render
@@ -56,7 +56,7 @@ function App() {
   console.log("-----state----->", state);
 
   // -------------------6. useMemo------------------- <- memorization cache result of function call
-  const factorial = useCallback((n) => {
+  const factorial = (n) => {
     if (n < 0) {
       return -1;
     }
@@ -64,7 +64,7 @@ function App() {
       return 1;
     }
     return n * factorial(n - 1);
-  }, []);
+  }
   const memoizedValue = useMemo(() => factorial(count), [count, factorial]);
 
   // -------------------7. useCallback-------------------
@@ -92,9 +92,7 @@ function App() {
       <h2>memoizedValue: {memoizedValue}</h2>
       <h2>memoizedCallback: {memoizedCallback()}</h2>
 
-      <UserContext.Provider value={"user.name"}>
-        {" "}
-        {/* <- can pass anything */}
+      <UserContext.Provider value={"user.name"}> {/* <- can pass anything */}
         <InnerComponent />
       </UserContext.Provider>
     </div>
